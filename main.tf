@@ -31,7 +31,7 @@ module "postgres" {
   primary_datastore = "vsanDatastore"
   folder_path       = "management"
   networks = {
-    "seg-general" : "${nsxt_policy_ip_address_allocation.this[count.index].allocation_ip}/22"
+    "seg-general" : "${nsxt_policy_ip_address_allocation.this.allocation_ip}/22"
   }
   dns_server_list = [
     "172.21.15.150",
