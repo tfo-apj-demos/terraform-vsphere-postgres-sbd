@@ -92,7 +92,7 @@ module "database_secrets" {
   vault_mount_postgres_path = "postgres"
   database_connection_name = "${local.workspace_entity_name}"
 
-  database_addresses = module.postgres.ip_address
+  database_addresses = [ module.postgres.ip_address ]
   database_username = "postgres"
   database_name = "postgres"
   database_roles = [
