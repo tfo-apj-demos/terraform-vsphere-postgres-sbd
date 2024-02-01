@@ -66,7 +66,7 @@ module "boundary_target" {
     }
   ]
   project_name = "grantorchard"
-  host_catalog_id = "hcst_RACKlVym4Z"
+  host_catalog_id = "hcst_7B2FWBRqb0"
   hostname_prefix = "postgres_sbd"
   injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
 }
