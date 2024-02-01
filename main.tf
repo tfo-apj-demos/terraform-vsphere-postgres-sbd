@@ -102,7 +102,17 @@
 # }
 
 output "slug" {
-  value = var.TFC_WORKSPACE_SLUG
+  value = "organization:${split("/", var.TFC_WORKSPACE_SLUG)[0]}:project:${var.TFC_PROJECT_NAME}:workspace:${var.TFC_WORKSPACE_NAME}"
+  # organization:tfo-apj-demos:project:10 - gcve-foundations:workspace:vsphere-vault-deploy
+}
+
+terraform {
+  cloud {
+    organization = "tfo-apj-demos"
+    workspaces {
+      name = "vsphere-postgres-sbd"
+    }
+  }
 }
 
 
