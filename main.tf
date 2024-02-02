@@ -93,7 +93,7 @@ module "database_secrets" {
   database_connection_name = "${var.TFC_WORKSPACE_ID}-postgres"
 
   database_addresses = [ module.postgres.ip_address ]
-  database_username = "postgres"
+  database_username = "vault"
   database_password = "HashiCorp123!"
   database_name = "postgres"
   database_roles = [
