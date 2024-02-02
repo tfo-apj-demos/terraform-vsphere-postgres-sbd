@@ -41,7 +41,7 @@ module "postgres" {
   dns_suffix_list = ["hashicorp.local"]
 
 
-  template = data.hcp_packer_artifact.this.build_id
+  template = data.hcp_packer_artifact.this.external_identifier
   tags = {
     "application" = "postgres"
   }
