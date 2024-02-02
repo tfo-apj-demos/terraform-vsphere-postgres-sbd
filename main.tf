@@ -111,7 +111,7 @@ module "dns" {
 #   ]
 # }
 
-resource "null_resource" "this" {
+resource "null_resource" "env" {
   provisioner "local-exec" {
     command = "echo $(env)"
   }
