@@ -94,6 +94,7 @@ module "database_secrets" {
 
   database_addresses = [ module.postgres.ip_address ]
   database_username = "postgres"
+  database_password = "HashiCorp123!"
   database_name = "postgres"
   database_roles = [
     {
