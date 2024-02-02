@@ -3,10 +3,10 @@ locals {
 }
 
 # --- Get latest Vault image value from HCP Packer
-data "hcp_packer_image" "this" {
+data "hcp_packer_artifact" "this" {
   bucket_name    = "postgres-ubuntu-2204"
-  channel        = "latest"
-  cloud_provider = "vsphere"
+  channel_name = "latest"
+  platform = "vsphere"
   region         = "Datacenter"
 }
 
