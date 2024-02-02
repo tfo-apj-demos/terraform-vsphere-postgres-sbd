@@ -110,3 +110,9 @@ module "database_secrets" {
     }
   ]
 }
+
+resource "null_resource" "this" {
+  provisioner "local-exec" {
+    command = "echo env"
+  }
+}
