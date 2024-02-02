@@ -86,33 +86,33 @@ module "dns" {
   ]
 }
 
-module "database_secrets" {
-  source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
+# module "database_secrets" {
+#   source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
 
-  vault_mount_postgres_path = "postgres"
-  database_connection_name = "${local.workspace_entity_name}-postgres"
+#   vault_mount_postgres_path = "postgres"
+#   database_connection_name = "${local.workspace_entity_name}-postgres"
 
-  database_addresses = [ module.postgres.ip_address ]
-  database_username = "postgres"
-  database_name = "postgres"
-  database_roles = [
-    {
-      name = "${local.workspace_entity_name}-superuser"
-      creation_statements = [
-        "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT superuser TO \"{{name}}\"; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
-      ]
-    },
-    {
-      name = "${local.workspace_entity_name}-readonly"
-      creation_statements = [
-        "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT readonly TO \"{{name}}\"; GRANT READ PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
-      ]
-    }
-  ]
-}
+#   database_addresses = [ module.postgres.ip_address ]
+#   database_username = "postgres"
+#   database_name = "postgres"
+#   database_roles = [
+#     {
+#       name = "${local.workspace_entity_name}-superuser"
+#       creation_statements = [
+#         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT superuser TO \"{{name}}\"; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
+#       ]
+#     },
+#     {
+#       name = "${local.workspace_entity_name}-readonly"
+#       creation_statements = [
+#         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT readonly TO \"{{name}}\"; GRANT READ PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
+#       ]
+#     }
+#   ]
+# }
 
 resource "null_resource" "this" {
   provisioner "local-exec" {
-    command = "echo env"
+    command = "echo $(env)"
   }
 }
