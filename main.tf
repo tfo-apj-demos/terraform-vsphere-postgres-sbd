@@ -41,7 +41,7 @@ module "postgres" {
   dns_suffix_list = ["hashicorp.local"]
 
 
-  template = data.hcp_packer_image.this.cloud_image_id
+  template = data.hcp_packer_artifact.this.cloud_image_id
   tags = {
     "application" = "postgres"
   }
