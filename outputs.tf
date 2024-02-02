@@ -1,3 +1,3 @@
-output "workspace_entity_name" {
-  value = local.workspace_entity_name
-}
+# output "workspace_environment_variables" {
+#   value = null_resource.this
+# }
