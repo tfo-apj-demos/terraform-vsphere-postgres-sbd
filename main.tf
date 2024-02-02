@@ -99,7 +99,7 @@ module "database_secrets" {
     {
       name = "${var.TFC_WORKSPACE_ID}-superuser"
       creation_statements = [
-        "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SUPERUSER TO \"{{name}}\"; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
+        "CREATE ROLE \"{{name}}\" SUPERUSER WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
       ]
     }
   ]
