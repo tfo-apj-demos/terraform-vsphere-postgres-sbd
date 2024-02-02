@@ -1,5 +1,5 @@
 locals {
-  workspace_entity_name = "organization:${split("/", var.TFC_WORKSPACE_SLUG)[0]}:project:${var.TFC_PROJECT_NAME}:workspace:${var.TFC_WORKSPACE_NAME}"
+  #workspace_entity_name = "organization:${split("/", var.TFC_WORKSPACE_SLUG)[0]}:project:${var.TFC_PROJECT_NAME}:workspace:${var.TFC_WORKSPACE_NAME}"
 }
 
 # --- Get latest Vault image value from HCP Packer
@@ -86,30 +86,24 @@ module "dns" {
   ]
 }
 
-# module "database_secrets" {
-#   source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
+module "database_secrets" {
+  source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
 
-#   vault_mount_postgres_path = "postgres"
-#   database_connection_name = "${local.workspace_entity_name}-postgres"
+  vault_mount_postgres_path = "postgres"
+  database_connection_name = "${local.workspace_entity_name}-postgres"
 
-#   database_addresses = [ module.postgres.ip_address ]
-#   database_username = "postgres"
-#   database_name = "postgres"
-#   database_roles = [
-#     {
-#       name = "${local.workspace_entity_name}-superuser"
-#       creation_statements = [
-#         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT superuser TO \"{{name}}\"; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
-#       ]
-#     },
-#     {
-#       name = "${local.workspace_entity_name}-readonly"
-#       creation_statements = [
-#         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT readonly TO \"{{name}}\"; GRANT READ PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
-#       ]
-#     }
-#   ]
-# }
+  database_addresses = [ module.postgres.ip_address ]
+  database_username = "postgres"
+  database_name = "postgres"
+  database_roles = [
+    {
+      name = "${var.TFC_WORKSPACE_ID}-superuser"
+      creation_statements = [
+        "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT superuser TO \"{{name}}\"; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
+      ]
+    }
+  ]
+}
 
 resource "null_resource" "env" {
   provisioner "local-exec" {
