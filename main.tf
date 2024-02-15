@@ -88,10 +88,10 @@ module "dns" {
 
 module "database_secrets" {
   source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
-  #TFC_WORKSPACE_ID = var.TFC_WORKSPACE_ID
+  TFC_WORKSPACE_ID = var.TFC_WORKSPACE_ID
 
   vault_mount_postgres_path = "postgres"
-  database_connection_suffix = "postgres"
+  database_connection_name = "${var.TFC_WORKSPACE_ID}-postgres"
 
   database_addresses = [ module.postgres.ip_address ]
   database_username = "vault"
@@ -99,7 +99,7 @@ module "database_secrets" {
   database_name = "postgres"
   database_roles = [
     {
-      suffix = "read"
+      name = "${var.TFC_WORKSPACE_ID}-read"
       creation_statements = [
         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";"
       ]
