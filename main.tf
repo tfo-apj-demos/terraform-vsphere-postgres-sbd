@@ -90,7 +90,7 @@ module "database_secrets" {
   source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
 
   vault_mount_postgres_path = "postgres"
-  database_connection_name = "${var.TFC_WORKSPACE_ID}-postgres"
+  database_connection_suffix = "postgres"
 
   database_addresses = [ module.postgres.ip_address ]
   database_username = "vault"
@@ -98,16 +98,10 @@ module "database_secrets" {
   database_name = "postgres"
   database_roles = [
     {
-      name = "${var.TFC_WORKSPACE_ID}-superuser"
+      suffix = "read"
       creation_statements = [
-        "CREATE ROLE \"{{name}}\" SUPERUSER WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT ALL PRIVILEGES ON DATABASE postgres TO \"{{name}}\";"
+        "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";"
       ]
     }
   ]
-}
-
-resource "null_resource" "env" {
-  provisioner "local-exec" {
-    command = "echo $(env)"
-  }
 }
