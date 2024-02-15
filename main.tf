@@ -50,7 +50,7 @@ module "postgres" {
 # --- Create Boundary targets for the postgres nodes
 module "boundary_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "0.0.3"
+  version = "1.0.1-alpha"
 
   hosts = [
     { 
@@ -62,13 +62,15 @@ module "boundary_target" {
     { 
       name = "postgres",
       type = "tcp",
-      port = "5432"
+      port = "5432",
+      credential_paths = module.database_secrets.credential_paths
     }
   ]
   project_name = "grantorchard"
   host_catalog_id = "hcst_7B2FWBRqb0"
   hostname_prefix = "postgres_sbd"
-  injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
+  credential_store_token = module.database_secrets.token
+  #injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
 }
 
 # --- Add to DNS
