@@ -50,7 +50,7 @@ module "postgres" {
 # --- Create Boundary targets for the postgres nodes
 module "boundary_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.0.1-alpha"
+  version = "1.0.2-alpha"
 
   hosts = [
     { 
