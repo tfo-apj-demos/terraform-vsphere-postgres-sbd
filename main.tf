@@ -50,7 +50,7 @@ module "postgres" {
 # --- Create Boundary targets for the postgres nodes
 module "boundary_target" {
   source  = "app.terraform.io/tfo-apj-demos/target/boundary"
-  version = "1.0.6-alpha"
+  version = "1.0.7-alpha"
 
   hosts = [
     { 
@@ -71,6 +71,7 @@ module "boundary_target" {
   hostname_prefix = "postgres_sbd"
   credential_store_token = module.database_secrets.token
   vault_address = "https://vault.gcve.local:8200"
+  tls_skip_verify_vault_server = true
   #injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
 }
 
