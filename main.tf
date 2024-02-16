@@ -70,6 +70,7 @@ module "boundary_target" {
   host_catalog_id = "hcst_7B2FWBRqb0"
   hostname_prefix = "postgres_sbd"
   credential_store_token = module.database_secrets.token
+  vault_address = "https://vault.gcve.local:8200"
   #injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
 }
 
