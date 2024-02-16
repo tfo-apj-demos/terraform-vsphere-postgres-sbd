@@ -71,7 +71,6 @@ module "boundary_target" {
   hostname_prefix = "postgres_sbd"
   credential_store_token = module.database_secrets.token
   vault_address = "https://vault.gcve.local:8200"
-  tls_skip_verify_vault_server = true
   #injected_credential_library_ids = ["clvsclt_bDETPnhh75"]
 }
 
