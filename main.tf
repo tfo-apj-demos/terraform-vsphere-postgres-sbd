@@ -94,7 +94,7 @@ module "dns" {
 module "database_secrets" {
   source = "github.com/tfo-apj-demos/terraform-vault-postgres-connection.git"
 
-  vault_mount_postgres_path = "postgres"
+  #vault_mount_postgres_path = "postgres"
   database_connection_name = "${var.TFC_WORKSPACE_ID}-postgres"
 
   database_addresses = [ module.postgres.ip_address ]
