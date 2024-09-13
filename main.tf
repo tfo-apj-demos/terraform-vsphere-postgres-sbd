@@ -66,7 +66,7 @@ module "boundary_target" {
       credential_paths = module.database_secrets.credential_paths
     }
   ]
-  project_name = "grantorchard"
+  project_name = "CloudbrokerAz"
   host_catalog_id = "hcst_7B2FWBRqb0"
   hostname_prefix = "postgres_sbd"
   credential_store_token = module.database_secrets.token
